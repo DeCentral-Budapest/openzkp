@@ -17,3 +17,4 @@ Makefile linguist-vendored
 Makefile.am linguist-vendored
 Makefile.in linguist-vendored
 missing linguist-vendored
+*.h linguist-language=C
