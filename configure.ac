@@ -11,5 +11,4 @@ AC_CHECK_LIB([crypto], [RAND_bytes])
 AC_CHECK_LIB([m], [pow])
 AC_FUNC_MALLOC
 AC_PREFIX_DEFAULT(/usr)
-AC_CONFIG_FILES([Makefile src/Makefile])
-AC_OUTPUT
+AC_OUTPUT([Makefile src/Makefile man/Makefile])

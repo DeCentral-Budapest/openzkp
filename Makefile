@@ -317,7 +317,7 @@ top_build_prefix =
 top_builddir = .
 top_srcdir = .
 AUTOMAKE_OPTIONS = foreign
-SUBDIRS = src doc examples man scripts
+SUBDIRS = src man 
 all: config.h
 	$(MAKE) $(AM_MAKEFLAGS) all-recursive
 

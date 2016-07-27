@@ -37,4 +37,5 @@ autom4te.cache
 config.log
 stamp-h1
 src/.deps
+src/.libs
 examples/.deps
