@@ -39,3 +39,6 @@ stamp-h1
 src/.deps
 src/.libs
 examples/.deps
+
+# vim stuff
+*.swp

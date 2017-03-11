@@ -130,7 +130,7 @@ am__uninstall_files_from_dir = { \
 am__installdirs = "$(DESTDIR)$(libdir)" "$(DESTDIR)$(pkgincludedir)"
 LTLIBRARIES = $(lib_LTLIBRARIES)
 libzkp_la_LIBADD =
-am_libzkp_la_OBJECTS = libzkp_la-ffs.lo
+am_libzkp_la_OBJECTS = libzkp_la-ffs.lo libzkp_la-ilmp.lo
 libzkp_la_OBJECTS = $(am_libzkp_la_OBJECTS)
 AM_V_lt = $(am__v_lt_$(V))
 am__v_lt_ = $(am__v_lt_$(AM_DEFAULT_VERBOSITY))
@@ -318,10 +318,10 @@ top_build_prefix = ../
 top_builddir = ..
 top_srcdir = ..
 lib_LTLIBRARIES = libzkp.la
-libzkp_la_SOURCES = ffs.c
+libzkp_la_SOURCES = ffs.c ilmp.c
 libzkp_la_CFLAGS = -Wall -fPIC -O3
 libzkp_la_LDFLAGS = -lcrypto -lm -shared -version-info 0:0:0
-pkginclude_HEADERS = ffs.h
+pkginclude_HEADERS = ffs.h ilmp.h modp.h
 all: all-am
 
 .SUFFIXES:
@@ -401,6 +401,7 @@ distclean-compile:
 	-rm -f *.tab.c
 
 include ./$(DEPDIR)/libzkp_la-ffs.Plo
+include ./$(DEPDIR)/libzkp_la-ilmp.Plo
 
 .c.o:
 	$(AM_V_CC)$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -429,6 +430,13 @@ libzkp_la-ffs.lo: ffs.c
 #	$(AM_V_CC)source='ffs.c' object='libzkp_la-ffs.lo' libtool=yes \
 #	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
 #	$(AM_V_CC_no)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libzkp_la_CFLAGS) $(CFLAGS) -c -o libzkp_la-ffs.lo `test -f 'ffs.c' || echo '$(srcdir)/'`ffs.c
+
+libzkp_la-ilmp.lo: ilmp.c
+	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libzkp_la_CFLAGS) $(CFLAGS) -MT libzkp_la-ilmp.lo -MD -MP -MF $(DEPDIR)/libzkp_la-ilmp.Tpo -c -o libzkp_la-ilmp.lo `test -f 'ilmp.c' || echo '$(srcdir)/'`ilmp.c
+	$(AM_V_at)$(am__mv) $(DEPDIR)/libzkp_la-ilmp.Tpo $(DEPDIR)/libzkp_la-ilmp.Plo
+#	$(AM_V_CC)source='ilmp.c' object='libzkp_la-ilmp.lo' libtool=yes \
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(AM_V_CC_no)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libzkp_la_CFLAGS) $(CFLAGS) -c -o libzkp_la-ilmp.lo `test -f 'ilmp.c' || echo '$(srcdir)/'`ilmp.c
 
 mostlyclean-libtool:
 	-rm -f *.lo
