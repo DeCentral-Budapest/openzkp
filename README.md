@@ -6,15 +6,22 @@ OpenZKP is an effort to make a truly bullet-proof and industry-ready library for
 
 ## Algorithms supported
 - Feige–Fiat–Shamir identification scheme
-
+- Generalized Chaum-pedersen proof (Work in progress)
 More to come...
 
+## Usage
+```
+./configure
+make
+make install
+gcc my_source.c -lzkp -lcrypto -lm
+```
 
 ## License Information
 OpenZKP is licensed under the Apache2 license, this means you can do anything with it, even for commercial use but keep in mind if that you **modify** the code you must state so. Crypto is a sensitive topic and one shall be completely confident whether this library has any modifications that could possibly break security.
 
 ```
-Copyright 2016 Ábrahám Endre
+Copyright 2016-2017 Ábrahám Endre
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
