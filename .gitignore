@@ -42,3 +42,6 @@ examples/.deps
 
 # vim stuff
 *.swp
+
+# fbinfer stuff
+infer-out/
