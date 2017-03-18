@@ -6,7 +6,8 @@ OpenZKP is an effort to make a truly bullet-proof and industry-ready library for
 
 ## Algorithms supported
 - Feige–Fiat–Shamir identification scheme
-- Generalized Chaum-pedersen proof (Work in progress)
+- Generalized Chaum-pedersen proof (ILMP)
+
 More to come...
 
 ## Usage

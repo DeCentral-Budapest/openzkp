@@ -45,3 +45,7 @@ examples/.deps
 
 # fbinfer stuff
 infer-out/
+
+#test executables
+tests/ilmp
+tests/ffs

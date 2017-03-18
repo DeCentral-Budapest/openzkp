@@ -1,5 +1,6 @@
 #include "ilmp.h"
 #include <stdio.h>
+#include <openssl/err.h>
 
 BIGNUM **ILMP_init_commitment(BIGNUM **s1, BIGNUM **s2, size_t len, BN_CTX *ctx)
 {
@@ -22,7 +23,6 @@ BIGNUM **ILMP_init_commitment(BIGNUM **s1, BIGNUM **s2, size_t len, BN_CTX *ctx)
     theta[i] = BN_new();
     ret[i] = BN_new();
     BN_rand(theta[i], 16, 0, 0);
-    BN_print_fp(stdout, theta[i]);
   }
 
   //TODO optimize this
@@ -49,9 +49,22 @@ BIGNUM *ILMP_init_challenge()
 {
   BIGNUM *ret = BN_new();
   BIGNUM *q = BN_new();
-  BN_hex2bn(&q, ZKP_MODEX_Q);
-  BN_rand_range(ret, q);
+  if(!BN_hex2bn(&q, ZKP_MODEX_Q))
+  {
+    fprintf(stderr, "%s:%d:failed to pick random challenge\n", __FILE__, __LINE__);
+    goto cleanup;
+  }
+  if(!BN_rand_range(ret, q))
+  {
+    fprintf(stderr, "%s:%d:failed to pick random challenge\n", __FILE__, __LINE__);
+    goto cleanup;
+  }
+
   return ret;
+cleanup:
+  free(ret);
+  free(q);
+  return 0;
 }
 
 BIGNUM **ILMP_final(BIGNUM **s1, BIGNUM **s2, BIGNUM **commitment, BIGNUM *challenge, size_t len, BN_CTX *ctx)
@@ -71,12 +84,10 @@ BIGNUM **ILMP_final(BIGNUM **s1, BIGNUM **s2, BIGNUM **commitment, BIGNUM *chall
 
     for(j=i+1; j<len; j++)
     {
-      BN_div(t1, 0, s2[i], s1[i], ctx);
+      BN_div(t1, 0, s2[j], s1[j], ctx);
     }
     ret[i] = BN_new();
     BN_mul(ret[i], y, t1, ctx);
-    BN_print_fp(stderr, ret[i]); // FIXME lots of 0 values here
-    printf("\n");
   }
   return ret;
 }
